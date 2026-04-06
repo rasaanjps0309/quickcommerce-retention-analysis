@@ -1,156 +1,152 @@
-# QuickCommerce Retention Analysis  
-### Why Users Place One Order — and Never Come Back
+# QuickBasket — Habit Formation & Retention Analysis
+
+**Diagnosing why 60% of first-time buyers never return — and designing the intervention to fix it.**
 
 ---
 
-## Overview
+## Context
 
-This project analyzes user retention for a quick-commerce grocery delivery platform to understand why users fail to return after their first order.
+QuickBasket is a quick-commerce grocery delivery app operating across 8 Indian metros, promising 10–20 minute delivery of daily essentials. The company launched in October 2024 and scaled aggressively through Q1 2025 — acquiring 52,000 new users across January, February, and March.
 
-The analysis focuses on identifying **where users drop off, why it happens, and how it impacts business growth**.
+Acquisition is healthy. Activation is healthy (63% of signups place their first order). But the business has a retention problem: most users order once and never come back.
 
----
-
-## Business Context
-
-QuickBasket is a quick-commerce platform operating across major Indian metros.
-
-- ~52,000 users acquired in a quarter  
-- ~63% activation rate  
-- Severe drop in repeat purchases  
-
-Despite strong acquisition, the business struggles to convert users into repeat buyers.
+This project investigates **where users drop off, why it happens, and what to do about it** — using cohort analysis, behavioral segmentation, survival analysis, and impact sizing.
 
 ---
 
-## Problem Statement
+## The Core Question
 
-> A majority of users place their first order but do not return, leading to poor retention and weak unit economics.
-
-- 60–75% users drop after Week 1 :contentReference[oaicite:0]{index=0}  
-- Median user lifetime ~26 days :contentReference[oaicite:1]{index=1}  
-
-This indicates a failure in **early habit formation**.
+> Are newly acquired users forming weekly ordering habits? If not, where exactly are we losing them, and what's driving the drop-off?
 
 ---
 
-## Key Insight (TL;DR)
+## What the Analysis Revealed
 
-> Retention drops sharply after Week 1, indicating that users fail to build a repeat habit — not that the product lacks value.
+### 1. The Week-1 cliff is the biggest leak
 
-Users who survive 4 weeks retain at **85–91%**, proving that once habits form, retention stabilizes. :contentReference[oaicite:2]{index=2}  
+60–75% of first-time buyers do not place a second order within their first week. This one transition — from first order to second order — is where the business loses the majority of its users.
 
----
+### 2. But habits do form for those who survive
 
-## Analytical Approach
+Users who order consecutively for 4 weeks start retaining at 85–91% week-over-week. The product works. The habit loop exists. The problem is not product-market fit — it's that too few users survive the first month to reach the habit-locked phase.
 
-The analysis was structured in layers:
+### 3. The discount expectation cliff is the root cause
 
-1. **Cohort Retention Analysis**
-   - Weekly cohort tracking (W0 → W6)
+Users who never returned received higher first-order discounts (24%) compared to users who formed habits (13%). The welcome discount sets an artificially high value perception. When the second order reverts to near-full price, the perceived value drops and users leave.
 
-2. **Activation Funnel Analysis**
-   - Signup → First Order → Second Order
+This is reinforced by behavioral data: habit formers placed 3.2 orders in their first week with an average basket of Rs.315. Non-returners placed just 1.5 orders with Rs.276 baskets. The depth of first-week engagement — not just the first order — predicts who stays.
 
-3. **Survival Analysis**
-   - Time-to-churn and hazard rate identification
+### 4. This is a product problem, not a channel problem
 
-4. **Behavioral Segmentation**
-   - Returners vs non-returners
+The pattern holds across every acquisition channel — organic, paid, referral, influencer. Return rates vary by channel (referral at 42% vs influencer at 30%), but the mechanism of churn is identical everywhere. Fixing this requires changing the post-first-order experience, not reallocating marketing spend.
 
-5. **Channel & City Analysis**
-   - Retention comparison across acquisition channels and cities
+### 5. Day 0–14 is the intervention window
+
+Survival analysis confirms that the risk of churn peaks sharply at Day 14–18 — five to six times higher than any other point in the user lifecycle. After Day 21, the hazard rate flattens. Median user survival is just 26 days. If you don't engage a user within the first two weeks, they're gone.
 
 ---
 
-## Key Findings
+## Survival Analysis
 
-### 1. Severe Week-1 Drop (Habit Failure)
+### Kaplan-Meier Survival Curve
 
-**Observation:** 60–75% users drop after Week 1  
-**Interpretation:** Users do not integrate product into routine  
-**Business Meaning:** Majority of CAC is lost early  
+Half of all activated users churn within 26 days of their first order. By Day 84, only 21% remain active.
 
----
+![Survival Curve](notebook/kaplan_meier_curve.png)
 
-### 2. Discount Dependency Drives Churn
+### Hazard Rate
 
-**Observation:** Non-returners received higher first-order discounts (~24% vs 18.5%) :contentReference[oaicite:3]{index=3}  
-**Interpretation:** Discounts distort perceived value  
-**Business Meaning:** Low-quality, price-sensitive users are acquired  
+The probability of churning peaks at Day 14–18. There is no secondary spike — the entire retention challenge concentrates in this single window.
 
----
+![Hazard Rate](notebook/hazard_rate.png)
 
-### 3. Strong Retention After Habit Formation
+### Time-to-Reorder Survival
 
-**Observation:** Users active for 4+ weeks retain at 85–91% :contentReference[oaicite:4]{index=4}  
-**Interpretation:** Product works once habit forms  
-**Business Meaning:** Problem is early-stage retention, not product-market fit  
+65% of users haven't placed a second order by Day 7. The reorder window effectively closes by Day 14, and flatlines by Day 40.
 
----
-
-### 4. Critical Churn Window: Day 0–14
-
-**Observation:** Hazard rate peaks around Day 14–18 :contentReference[oaicite:5]{index=5}  
-**Interpretation:** Users decide early whether to continue  
-**Business Meaning:** Interventions must happen early  
-
----
-
-### 5. Engagement Depth Predicts Retention
-
-**Observation:** Habit users have higher order frequency, AOV, and lower discount usage :contentReference[oaicite:6]{index=6}  
-**Interpretation:** Deeper interaction builds stickiness  
-**Business Meaning:** Quality of engagement matters more than acquisition volume  
-
----
-
-## Root Cause
-
-Retention failure is driven by:
-
-- Discount-led acquisition (low intent users)
-- Value perception drop after first order
-- Lack of structured engagement in Day 0–14 window
-
-> The problem is not that users don’t like the product —  
-> it’s that they never stay long enough to form a habit.
+![Reorder Survival](notebook/reorder_survival_curve.png)
 
 ---
 
 ## Recommendation
 
-### Progressive Milestone Incentive (PMI)
+**Test a free delivery incentive on the second order** — nudge sent on Day 3 after first purchase, valid until Day 7.
 
-- Reduce friction for second order (free delivery)
-- Incentivize repeat behavior in Week 1–4
-- Avoid heavy discounts to prevent dependency  
+Why this specific intervention:
+- It targets the W0–W1 transition, where the largest volume of users is lost
+- It removes friction (delivery fee) without creating discount dependency
+- It acts within the Day 0–14 window that survival analysis identified as critical
+- It encourages a second order experience, which is the strongest predictor of continued engagement
+- It costs approximately Rs.30 per user — low risk with high potential upside
+
+Impact sizing shows that a 5 percentage point improvement in the 7-day return rate (37% to 42%) would generate approximately 500 additional retained users per month, translating to Rs.7–12 lakh in net monthly revenue.
+
+**The A/B experiment testing this intervention is documented here:**  
+[quickcommerce-retention-ab-test](https://github.com/rasaanjps0309/quickcommerce-retention-ab-test)
 
 ---
 
-## Impact Potential
+## Analytical Methods
 
-- +5pp improvement in Week-1 retention  
-- ~500 additional retained users/month  
-- ~₹8L revenue uplift  
+| Analysis | What it answers |
+|---|---|
+| Time to first order | How quickly do users activate after signup? |
+| Time to second order | How long before users come back — and how many never do? |
+| Weekly cohort retention | What does the retention curve look like across cohorts? |
+| Rolling consecutive retention | Are users forming genuine weekly habits? |
+| First order experience comparison | What about the first order predicts whether a user returns? |
+| Habit former behavioral profile | What do 4-week survivors look like vs early drop-offs? |
+| Channel quality analysis | Is the retention problem worse in specific channels? |
+| Kaplan-Meier survival analysis | When exactly do users churn, statistically? |
+| Hazard rate analysis | At what point is churn risk highest? |
+| Impact sizing | If we fix W1 retention, what's the revenue impact? |
 
 ---
 
-## Related Project
+## Data
 
-This analysis led to an A/B experiment:
+Synthetic dataset modeled after Indian quick-commerce benchmarks. Three tables covering 52,000 users, 136,000 orders, and 16,000 event summary records across January–April 2025. Distributions are calibrated to realistic patterns for city mix, channel quality, discount behavior, retention curves, and operational metrics.
 
-### QuickCommerce Retention A/B Test(https://github.com/rasaanjps0309/quickcommerce-retention-ab-test)
+---
+
+## Project Structure
+
+```
+├── README.md
+├── analysis_report.pdf
+├── sql/
+│   ├── 01_retention_analysis/
+│   │   ├── 01_time_to_first_order.sql
+│   │   ├── 02_time_to_second_order.sql
+│   │   ├── 03_weekly_cohort_retention.sql
+│   │   └── 04_rolling_consecutive_retention.sql
+│   ├── 02_diagnostic_deep_dive/
+│   │   ├── 05_first_order_experience_returners_vs_nonreturners.sql
+│   │   ├── 06_first_order_experience_by_cohort.sql
+│   │   ├── 07_habit_former_behavioral_profile.sql
+│   │   └── 08_channel_quality_w1_retention.sql
+│   └── 03_survival_analysis/
+│       ├── 09a_survival_time_to_churn.sql
+│       └── 09b_survival_time_to_reorder.sql
+├── notebook/
+│   ├── survival_analysis.ipynb
+│   ├── kaplan_meier_curve.png
+│   ├── hazard_rate.png
+│   └── reorder_survival_curve.png
+└── data/
+    ├── quickbasket_users.csv
+    ├── quickbasket_orders.csv
+    └── quickbasket_event_summary.csv
+```
 
 ---
 
 ## Tech Stack
 
-- SQL (PostgreSQL)  
-- Python (pandas, lifelines)  
-- Jupyter Notebook  
-- Claude AI
-- NotebookLM   
+PostgreSQL (pgAdmin) · Python (pandas, lifelines, scipy) · Jupyter Notebook · Claude AI · NotebookLM
 
 ---
 
+
+**Payel Saha** 
+Retention analytics, habit formation, and lifecycle strategy for consumer tech.
