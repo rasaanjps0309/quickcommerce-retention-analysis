@@ -154,4 +154,3 @@ This analysis led to an A/B experiment:
 
 ---
 
-## 📁 Project Structure
