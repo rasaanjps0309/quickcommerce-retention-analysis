@@ -109,38 +109,6 @@ Synthetic dataset modeled after Indian quick-commerce benchmarks. Three tables c
 
 ---
 
-## Project Structure
-
-```
-├── README.md
-├── analysis_report.pdf
-├── sql/
-│   ├── 01_retention_analysis/
-│   │   ├── 01_time_to_first_order.sql
-│   │   ├── 02_time_to_second_order.sql
-│   │   ├── 03_weekly_cohort_retention.sql
-│   │   └── 04_rolling_consecutive_retention.sql
-│   ├── 02_diagnostic_deep_dive/
-│   │   ├── 05_first_order_experience_returners_vs_nonreturners.sql
-│   │   ├── 06_first_order_experience_by_cohort.sql
-│   │   ├── 07_habit_former_behavioral_profile.sql
-│   │   └── 08_channel_quality_w1_retention.sql
-│   └── 03_survival_analysis/
-│       ├── 09a_survival_time_to_churn.sql
-│       └── 09b_survival_time_to_reorder.sql
-├── notebook/
-│   ├── survival_analysis.ipynb
-│   ├── kaplan_meier_curve.png
-│   ├── hazard_rate.png
-│   └── reorder_survival_curve.png
-└── data/
-    ├── quickbasket_users.csv
-    ├── quickbasket_orders.csv
-    └── quickbasket_event_summary.csv
-```
-
----
-
 ## Tech Stack
 
 PostgreSQL (pgAdmin) · Python (pandas, lifelines, scipy) · Jupyter Notebook · Claude AI · NotebookLM
